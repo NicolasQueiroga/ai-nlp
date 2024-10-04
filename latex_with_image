@@ -83,13 +83,6 @@ To gain deeper insights into the dataset, a Latent Dirichlet Allocation (LDA) to
 
 The classification accuracy achieved with the topic-based approach was 0.8610, an improvement over the baseline model. This suggests that topic-specific classifiers can be more effective in distinguishing between closely related categories within a topic.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{5.png}
-    \caption{Classification Report for the topic-based classification approach. Overall accuracy is 0.8610 with performance varying across topics.}
-    \label{fig:classification_report}
-\end{figure}
-
 The results show that the classifier performed particularly well in topics related to technology, religion, and sports, with precision and recall scores both high for these categories (e.g., precision of 0.94 for topic 10). However, some topics such as those related to political discussions exhibited lower recall due to overlap in vocabulary across related topics (e.g., topic 1 with a recall of 0.79).
 
 The topic-based classification strategy demonstrates that errors are not uniformly distributed across all topics. Certain topics showed higher classification effectiveness, and the two-layer classifier combining topic modeling with classification resulted in improved performance compared to a single-layer classifier.
