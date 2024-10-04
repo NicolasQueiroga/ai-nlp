@@ -69,16 +69,30 @@ As the dataset size increased, so did the model’s accuracy, but performance im
 
 \section{Topic Analysis}
 
-Using \textit{Latent Dirichlet Allocation (LDA)}, we assigned documents to 10 topics and trained individual classifiers for each topic. However, the two-layered classification approach resulted in low accuracy (0.1936) and balanced accuracy (0.1947). This poor performance likely stems from overlapping vocabularies between topics, making it difficult for the model to distinguish between categories like "soc.religion.christian" and "talk.politics.misc".
+To gain deeper insights into the dataset, a Latent Dirichlet Allocation (LDA) topic modeling approach was applied. This method allows us to explore whether categorizing documents into broader topics before classification could improve performance.
+
+\subsection{Topic-Based Classifier Implementation}
+
+\begin{itemize}
+    \item \textit{Topic Assignment}: Using a TF-IDF vectorizer, the text was transformed, and LDA was employed to assign each document to one of the 10 predefined topics.
+    \item \textit{Topic-Specific Classifiers}: For each topic, a Logistic Regression classifier was trained on the documents belonging to that specific topic. This allows the classifier to specialize in distinguishing between classes within the context of each topic.
+    \item \textit{Classification Process}: For the test data, documents were first assigned to topics using the LDA model, and then a topic-specific classifier was used for final classification.
+\end{itemize}
+
+\subsection{Results}
+
+The classification accuracy achieved with the topic-based approach was 0.8610, an improvement over the baseline model. This suggests that topic-specific classifiers can be more effective in distinguishing between closely related categories within a topic.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{5.png}
-    \caption{Confusion matrix of the two-layer classifier. The model struggles with closely related categories, as seen in low precision and recall.}
-    \label{fig:confusion_matrix}
+    \caption{Classification Report for the topic-based classification approach. Overall accuracy is 0.8610 with performance varying across topics.}
+    \label{fig:classification_report}
 \end{figure}
 
-The topic-based classification strategy, while conceptually promising, did not significantly enhance performance in this case, primarily due to shared terminology across topics and the short length of some documents.
+The results show that the classifier performed particularly well in topics related to technology, religion, and sports, with precision and recall scores both high for these categories (e.g., precision of 0.94 for topic 10). However, some topics such as those related to political discussions exhibited lower recall due to overlap in vocabulary across related topics (e.g., topic 1 with a recall of 0.79).
+
+The topic-based classification strategy demonstrates that errors are not uniformly distributed across all topics. Certain topics showed higher classification effectiveness, and the two-layer classifier combining topic modeling with classification resulted in improved performance compared to a single-layer classifier.
 
 \begin{thebibliography}{1}
 
